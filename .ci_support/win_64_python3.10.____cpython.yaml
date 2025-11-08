@@ -20,6 +20,8 @@ mpi:
 - nompi
 mpich:
 - '4'
+numpy:
+- '2'
 openmpi:
 - '4'
 pin_run_as_build:
