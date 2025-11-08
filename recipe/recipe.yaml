@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: 9_1_4_0
+  version: 9.14.0
 
 package:
   name: medcoupling
@@ -10,11 +10,9 @@ package:
 source:
   - url: https://github.com/SalomePlatform/medcoupling/archive/refs/tags/V${{ version | replace('.', '_') }}.tar.gz
     sha256: d4699b564fe1a113663649b9ff1c353314509763a5aca756569e6f4de8940049
-    file_name: medcoupling_${{ version }}.tar.gz
   - url: https://github.com/SalomePlatform/configuration/archive/refs/tags/V${{ version | replace('.', '_') }}.tar.gz
     sha256: 9ff6cacfc272ef75211dee555b67acc50ec9dee1862676d429c24c13a60c6052
     target_directory: deps/config
-    file_name: config_${{ version }}.tar.gz
 
 build:
   # string: py{{ CONDA_PY }}_mpi_{{ mpi }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}   # [mpi != "nompi"]
@@ -44,14 +42,16 @@ requirements:
     - libxml2
     - libmed
     - if: mpi != 'nompi'
-      then: petsc
-    - if: mpi != 'nompi'
-      then: ${{ mpi }}
+      then:
+        - petsc
+        - ${{ mpi }}
   run:
     - python
     - ${{ pin_compatible('numpy') }}
     - if: mpi != 'nompi'
       then: ${{ mpi }}
+  run_exports:
+    - ${{ pin_subpackage(name, upper_bound='x.x') }}
 
 tests:
   - python:
