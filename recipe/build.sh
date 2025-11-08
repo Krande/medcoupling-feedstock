@@ -32,3 +32,10 @@ cmake  -B build . \
 
 cd build
 make install -j$CPU_COUNT
+
+# Remove test files and __pycache__ directories that shouldn't be installed
+find "${PREFIX}" -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
+find "${SP_DIR}" -type f -name "*Test*.py" -delete 2>/dev/null || true
+rm -f "${SP_DIR}/MEDLoaderCouplingTrainingSession.py" 2>/dev/null || true
+rm -f "${SP_DIR}/MEDCouplingDataForTest.py" 2>/dev/null || true
+rm -f "${SP_DIR}/MEDLoaderDataForTest.py" 2>/dev/null || true
