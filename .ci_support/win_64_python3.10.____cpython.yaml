@@ -12,8 +12,6 @@ hdf5:
 - 1.14.6
 libboost_devel:
 - '1.88'
-libmed:
-- '4.1'
 libxml2:
 - '2.13'
 mpi:

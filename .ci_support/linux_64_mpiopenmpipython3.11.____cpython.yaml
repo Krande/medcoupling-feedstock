@@ -20,18 +20,18 @@ hdf5:
 - 1.14.6
 libboost_devel:
 - '1.88'
-libmed:
-- '4.1'
 libxml2:
 - '2.13'
 mpi:
-- nompi
+- openmpi
 mpich:
 - '4'
 numpy:
 - '2'
 openmpi:
 - '4'
+petsc:
+- '3.24'
 pin_run_as_build:
   python:
     min_pin: x.x
