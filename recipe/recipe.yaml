@@ -16,9 +16,8 @@ source:
     target_directory: deps/config
 
 build:
-  # string: py{{ CONDA_PY }}_mpi_{{ mpi }}_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}   # [mpi != "nompi"]
-  # string: py{{ CONDA_PY }}_nompi_h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}           # [mpi == "nompi"]
   number: 2
+  string: py${{ python | replace('.', '') }}_${{ mpi }}_h${{ hash }}_${{ build }}
   skip: osx
   prefix_detection:
     ignore_binary_files: true
@@ -41,7 +40,7 @@ requirements:
     - zlib
     - hdf5
     - libxml2
-    - libmed
+    - libmed * *${{ mpi_prefix }}*
     - if: mpi != 'nompi'
       then:
         - petsc
