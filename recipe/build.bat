@@ -5,7 +5,7 @@ cmake -B build -G "Ninja" . ^
     -Wno-dev ^
     -D CMAKE_BUILD_TYPE="Release" ^
     -D PYTHON_ROOT_DIR="%PREFIX%" ^
-    -D CMAKE_CXX_FLAGS="/bigobj" ^
+    -D CMAKE_CXX_FLAGS="/bigobj /wd4661 /EHsc" ^
     -D PYTHON_EXECUTABLE:FILEPATH="%PYTHON%" ^
     -D CONFIGURATION_ROOT_DIR="%SRC_DIR%/deps/config" ^
     -D SALOME_CMAKE_DEBUG=ON ^

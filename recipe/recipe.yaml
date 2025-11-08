@@ -1,10 +1,11 @@
 schema_version: 1
 
 context:
+  name: medcoupling
   version: 9.14.0
 
 package:
-  name: medcoupling
+  name: ${{ name|lower }}
   version: ${{ version }}
 
 source:
@@ -35,7 +36,7 @@ requirements:
     - swig >=4.0.2
   host:
     - python
-    - numpy <2
+    - numpy
     - libboost-devel
     - zlib
     - hdf5
