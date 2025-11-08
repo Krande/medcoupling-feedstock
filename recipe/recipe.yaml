@@ -4,6 +4,7 @@ context:
   name: medcoupling
   mpi: ${{ mpi or "nompi" }}
   version: 9.14.0
+  build: 2
 
 package:
   name: ${{ name|lower }}
@@ -17,7 +18,7 @@ source:
     target_directory: deps/config
 
 build:
-  number: 2
+  number: ${{ build|int + 100 if mpi == "nompi" else build|int }}
   string: py${{ python | replace('.', '') }}_${{ mpi }}_h${{ hash }}_${{ build }}
   skip: osx
   prefix_detection:
