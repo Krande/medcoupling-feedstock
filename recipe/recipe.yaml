@@ -42,7 +42,7 @@ requirements:
     - zlib
     - hdf5
     - libxml2
-    - libmed * *${{ mpi_prefix }}*
+    - libmed
     - if: mpi != 'nompi'
       then:
         - petsc
