@@ -3,8 +3,8 @@ schema_version: 1
 context:
   name: medcoupling
   mpi: ${{ mpi or "nompi" }}
-  version: 9.14.0
-  build: 8
+  version: 9.15.0
+  build: 0
   mpi_prefix: ${{ "nompi" if mpi == "nompi" else "mpi_" + mpi }}
 
 package:
@@ -13,9 +13,11 @@ package:
 
 source:
   - url: https://github.com/SalomePlatform/medcoupling/archive/refs/tags/V${{ version | replace('.', '_') }}.tar.gz
-    sha256: d4699b564fe1a113663649b9ff1c353314509763a5aca756569e6f4de8940049
+    sha256: 4ec97fc881f12e71965ea73422319aac6f69319c5c688eb165329dce826cbbb8
+    patches:
+      - patches/swig_python2_api_compat.patch
   - url: https://github.com/SalomePlatform/configuration/archive/refs/tags/V${{ version | replace('.', '_') }}.tar.gz
-    sha256: 9ff6cacfc272ef75211dee555b67acc50ec9dee1862676d429c24c13a60c6052
+    sha256: 01dd367a167383fbc03ca8de47e127c87f4a9d4c826c68768ac3a2bfd5f998f7
     target_directory: deps/config
     patches:
       - patches/fix_hdf5_cmake_property.patch
