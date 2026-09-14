@@ -4,3 +4,9 @@ mpi:
 
 openmpi:
   - 5
+
+# code_aster (code-aster-feedstock) does not build with petsc 3.25 yet: provide
+# openmpi builds for petsc 3.24 as well as for the current global pin
+petsc:
+  - '3.24'
+  - '3.25'
