@@ -1,0 +1,248 @@
+--- a/src/MEDCoupling_Swig/MEDCoupling.i
++++ b/src/MEDCoupling_Swig/MEDCoupling.i
+@@ -22,6 +22,28 @@
+ #else
+ %module MEDCoupling
+ #endif
++
++%header %{
++/* SWIG >= 4.3 dropped Python 2 support and no longer emits the Python 2
++   C-API aliases that the MEDCoupling typemaps rely on. Re-define them here
++   exactly as SWIG used to, so the generated wrappers keep compiling. */
++#include <Python.h>
++#ifndef PyInt_Check
++#define PyInt_Check(x) PyLong_Check(x)
++#define PyInt_AsLong(x) PyLong_AsLong(x)
++#define PyInt_FromLong(x) PyLong_FromLong(x)
++#define PyInt_FromSize_t(x) PyLong_FromSize_t(x)
++#define PyString_Check(name) PyBytes_Check(name)
++#define PyString_FromString(x) PyUnicode_FromString(x)
++#define PyString_Format(fmt, args) PyUnicode_Format(fmt, args)
++#define PyString_AsString(str) PyBytes_AsString(str)
++#define PyString_Size(str) PyBytes_Size(str)
++#define PyString_InternFromString(key) PyUnicode_InternFromString(key)
++#endif
++#ifndef PyInt_AS_LONG
++#define PyInt_AS_LONG PyLong_AS_LONG
++#endif
++%}
+ 
+ %include "MEDCouplingCommon.i"
+ 
+--- a/src/MEDCoupling_Swig/MEDCouplingRemapper.i
++++ b/src/MEDCoupling_Swig/MEDCouplingRemapper.i
+@@ -18,6 +18,28 @@
+ //
+ 
+ %module MEDCouplingRemapper
++
++%header %{
++/* SWIG >= 4.3 dropped Python 2 support and no longer emits the Python 2
++   C-API aliases that the MEDCoupling typemaps rely on. Re-define them here
++   exactly as SWIG used to, so the generated wrappers keep compiling. */
++#include <Python.h>
++#ifndef PyInt_Check
++#define PyInt_Check(x) PyLong_Check(x)
++#define PyInt_AsLong(x) PyLong_AsLong(x)
++#define PyInt_FromLong(x) PyLong_FromLong(x)
++#define PyInt_FromSize_t(x) PyLong_FromSize_t(x)
++#define PyString_Check(name) PyBytes_Check(name)
++#define PyString_FromString(x) PyUnicode_FromString(x)
++#define PyString_Format(fmt, args) PyUnicode_Format(fmt, args)
++#define PyString_AsString(str) PyBytes_AsString(str)
++#define PyString_Size(str) PyBytes_Size(str)
++#define PyString_InternFromString(key) PyUnicode_InternFromString(key)
++#endif
++#ifndef PyInt_AS_LONG
++#define PyInt_AS_LONG PyLong_AS_LONG
++#endif
++%}
+ 
+ %include "MEDCouplingCommon.i"
+ 
+--- a/src/MEDLoader/Swig/MEDLoader.i
++++ b/src/MEDLoader/Swig/MEDLoader.i
+@@ -19,6 +19,28 @@
+ // Author : Anthony Geay (CEA/DEN)
+ 
+ %module MEDLoader
++
++%header %{
++/* SWIG >= 4.3 dropped Python 2 support and no longer emits the Python 2
++   C-API aliases that the MEDCoupling typemaps rely on. Re-define them here
++   exactly as SWIG used to, so the generated wrappers keep compiling. */
++#include <Python.h>
++#ifndef PyInt_Check
++#define PyInt_Check(x) PyLong_Check(x)
++#define PyInt_AsLong(x) PyLong_AsLong(x)
++#define PyInt_FromLong(x) PyLong_FromLong(x)
++#define PyInt_FromSize_t(x) PyLong_FromSize_t(x)
++#define PyString_Check(name) PyBytes_Check(name)
++#define PyString_FromString(x) PyUnicode_FromString(x)
++#define PyString_Format(fmt, args) PyUnicode_Format(fmt, args)
++#define PyString_AsString(str) PyBytes_AsString(str)
++#define PyString_Size(str) PyBytes_Size(str)
++#define PyString_InternFromString(key) PyUnicode_InternFromString(key)
++#endif
++#ifndef PyInt_AS_LONG
++#define PyInt_AS_LONG PyLong_AS_LONG
++#endif
++%}
+ 
+ %include "MEDLoaderCommon.i"
+ 
+--- a/src/MEDPartitioner_Swig/MEDPartitioner.i
++++ b/src/MEDPartitioner_Swig/MEDPartitioner.i
+@@ -19,6 +19,28 @@
+ 
+ %module MEDPartitioner
+ 
++%header %{
++/* SWIG >= 4.3 dropped Python 2 support and no longer emits the Python 2
++   C-API aliases that the MEDCoupling typemaps rely on. Re-define them here
++   exactly as SWIG used to, so the generated wrappers keep compiling. */
++#include <Python.h>
++#ifndef PyInt_Check
++#define PyInt_Check(x) PyLong_Check(x)
++#define PyInt_AsLong(x) PyLong_AsLong(x)
++#define PyInt_FromLong(x) PyLong_FromLong(x)
++#define PyInt_FromSize_t(x) PyLong_FromSize_t(x)
++#define PyString_Check(name) PyBytes_Check(name)
++#define PyString_FromString(x) PyUnicode_FromString(x)
++#define PyString_Format(fmt, args) PyUnicode_Format(fmt, args)
++#define PyString_AsString(str) PyBytes_AsString(str)
++#define PyString_Size(str) PyBytes_Size(str)
++#define PyString_InternFromString(key) PyUnicode_InternFromString(key)
++#endif
++#ifndef PyInt_AS_LONG
++#define PyInt_AS_LONG PyLong_AS_LONG
++#endif
++%}
++
+ %{
+ #include "MEDFileData.hxx"
+ 
+--- a/src/ParaMEDMEM_Swig/ParaMEDMEM.i
++++ b/src/ParaMEDMEM_Swig/ParaMEDMEM.i
+@@ -21,6 +21,28 @@
+ 
+ %module ParaMEDMEM
+ 
++%header %{
++/* SWIG >= 4.3 dropped Python 2 support and no longer emits the Python 2
++   C-API aliases that the MEDCoupling typemaps rely on. Re-define them here
++   exactly as SWIG used to, so the generated wrappers keep compiling. */
++#include <Python.h>
++#ifndef PyInt_Check
++#define PyInt_Check(x) PyLong_Check(x)
++#define PyInt_AsLong(x) PyLong_AsLong(x)
++#define PyInt_FromLong(x) PyLong_FromLong(x)
++#define PyInt_FromSize_t(x) PyLong_FromSize_t(x)
++#define PyString_Check(name) PyBytes_Check(name)
++#define PyString_FromString(x) PyUnicode_FromString(x)
++#define PyString_Format(fmt, args) PyUnicode_Format(fmt, args)
++#define PyString_AsString(str) PyBytes_AsString(str)
++#define PyString_Size(str) PyBytes_Size(str)
++#define PyString_InternFromString(key) PyUnicode_InternFromString(key)
++#endif
++#ifndef PyInt_AS_LONG
++#define PyInt_AS_LONG PyLong_AS_LONG
++#endif
++%}
++
+ #define MEDCOUPLING_EXPORT
+ #define INTERPKERNEL_EXPORT
+ 
+--- a/src/PyWrapping/medcoupling.i
++++ b/src/PyWrapping/medcoupling.i
+@@ -20,6 +20,28 @@
+ // Author : Anthony Geay (EDF R&D)
+ 
+ %module medcoupling
++
++%header %{
++/* SWIG >= 4.3 dropped Python 2 support and no longer emits the Python 2
++   C-API aliases that the MEDCoupling typemaps rely on. Re-define them here
++   exactly as SWIG used to, so the generated wrappers keep compiling. */
++#include <Python.h>
++#ifndef PyInt_Check
++#define PyInt_Check(x) PyLong_Check(x)
++#define PyInt_AsLong(x) PyLong_AsLong(x)
++#define PyInt_FromLong(x) PyLong_FromLong(x)
++#define PyInt_FromSize_t(x) PyLong_FromSize_t(x)
++#define PyString_Check(name) PyBytes_Check(name)
++#define PyString_FromString(x) PyUnicode_FromString(x)
++#define PyString_Format(fmt, args) PyUnicode_Format(fmt, args)
++#define PyString_AsString(str) PyBytes_AsString(str)
++#define PyString_Size(str) PyBytes_Size(str)
++#define PyString_InternFromString(key) PyUnicode_InternFromString(key)
++#endif
++#ifndef PyInt_AS_LONG
++#define PyInt_AS_LONG PyLong_AS_LONG
++#endif
++%}
+ 
+ #define MEDCOUPLINGREMAPPER_EXPORT
+ #define INTERPKERNEL_EXPORT
+--- a/src/RENUMBER_Swig/MEDRenumber.i
++++ b/src/RENUMBER_Swig/MEDRenumber.i
+@@ -18,6 +18,28 @@
+ //
+ 
+ %module MEDRenumber
++
++%header %{
++/* SWIG >= 4.3 dropped Python 2 support and no longer emits the Python 2
++   C-API aliases that the MEDCoupling typemaps rely on. Re-define them here
++   exactly as SWIG used to, so the generated wrappers keep compiling. */
++#include <Python.h>
++#ifndef PyInt_Check
++#define PyInt_Check(x) PyLong_Check(x)
++#define PyInt_AsLong(x) PyLong_AsLong(x)
++#define PyInt_FromLong(x) PyLong_FromLong(x)
++#define PyInt_FromSize_t(x) PyLong_FromSize_t(x)
++#define PyString_Check(name) PyBytes_Check(name)
++#define PyString_FromString(x) PyUnicode_FromString(x)
++#define PyString_Format(fmt, args) PyUnicode_Format(fmt, args)
++#define PyString_AsString(str) PyBytes_AsString(str)
++#define PyString_Size(str) PyBytes_Size(str)
++#define PyString_InternFromString(key) PyUnicode_InternFromString(key)
++#endif
++#ifndef PyInt_AS_LONG
++#define PyInt_AS_LONG PyLong_AS_LONG
++#endif
++%}
+ 
+ %include "MEDRenumberCommon.i"
+ 
+--- a/src/ShapeRecogn/Swig/ShapeRecogn.i
++++ b/src/ShapeRecogn/Swig/ShapeRecogn.i
+@@ -18,6 +18,28 @@
+ //
+ 
+ %module ShapeRecogn
++
++%header %{
++/* SWIG >= 4.3 dropped Python 2 support and no longer emits the Python 2
++   C-API aliases that the MEDCoupling typemaps rely on. Re-define them here
++   exactly as SWIG used to, so the generated wrappers keep compiling. */
++#include <Python.h>
++#ifndef PyInt_Check
++#define PyInt_Check(x) PyLong_Check(x)
++#define PyInt_AsLong(x) PyLong_AsLong(x)
++#define PyInt_FromLong(x) PyLong_FromLong(x)
++#define PyInt_FromSize_t(x) PyLong_FromSize_t(x)
++#define PyString_Check(name) PyBytes_Check(name)
++#define PyString_FromString(x) PyUnicode_FromString(x)
++#define PyString_Format(fmt, args) PyUnicode_Format(fmt, args)
++#define PyString_AsString(str) PyBytes_AsString(str)
++#define PyString_Size(str) PyBytes_Size(str)
++#define PyString_InternFromString(key) PyUnicode_InternFromString(key)
++#endif
++#ifndef PyInt_AS_LONG
++#define PyInt_AS_LONG PyLong_AS_LONG
++#endif
++%}
+ 
+ %include "ShapeRecognCommon.i"
+ 
