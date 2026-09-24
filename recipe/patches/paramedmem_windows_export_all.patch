@@ -1,0 +1,26 @@
+diff --git a/src/ParaMEDMEM/CMakeLists.txt b/src/ParaMEDMEM/CMakeLists.txt
+index 28e78d3..183df53 100644
+--- a/src/ParaMEDMEM/CMakeLists.txt
++++ b/src/ParaMEDMEM/CMakeLists.txt
+@@ -75,6 +75,8 @@ set(paramedmem_SOURCES
+ 
+ add_library(paramedmem ${paramedmem_SOURCES})
+ target_link_libraries(paramedmem medcouplingcpp medicoco ${MPI_LIBRARIES})
++# no export macros in ParaMEDMEM: export everything from the DLL on Windows
++set_target_properties(paramedmem PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
+ install(
+   TARGETS paramedmem
+   EXPORT ${PROJECT_NAME}TargetGroup
+diff --git a/src/ParaMEDLoader/CMakeLists.txt b/src/ParaMEDLoader/CMakeLists.txt
+index 340a44b..f52fc53 100644
+--- a/src/ParaMEDLoader/CMakeLists.txt
++++ b/src/ParaMEDLoader/CMakeLists.txt
+@@ -44,6 +44,8 @@ set(paramedloader_SOURCES ParaMEDLoader.cxx ParaMEDFileMesh.cxx)
+ 
+ add_library(paramedloader ${paramedloader_SOURCES})
+ target_link_libraries(paramedloader paramedmem medloader ${PLATFORM_LIBS})
++# no export macros in ParaMEDLoader: export everything from the DLL on Windows
++set_target_properties(paramedloader PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
+ install(
+   TARGETS paramedloader
+   EXPORT ${PROJECT_NAME}TargetGroup

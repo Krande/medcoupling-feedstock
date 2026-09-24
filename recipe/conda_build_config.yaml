@@ -1,6 +1,12 @@
 mpi:
   - nompi
   - openmpi  # [not win]
+  - impi     # [win]
 
 openmpi:
   - 5
+
+# Windows Intel MPI: impi-devel >= 2021.17 (2021.16 has no Fortran support); must
+# match the impi_rt of the parallel hdf5/libmed builds
+impi_devel:   # [win]
+  - 2021.17.2 # [win]

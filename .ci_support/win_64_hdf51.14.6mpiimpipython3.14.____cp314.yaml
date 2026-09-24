@@ -9,13 +9,15 @@ channel_targets:
 cxx_compiler:
 - vs2022
 hdf5:
-- '2'
+- 1.14.6
+impi_devel:
+- 2021.17.2
 libboost_devel:
 - '1.90'
 libxml2_devel:
 - '2.15'
 mpi:
-- nompi
+- impi
 mpich:
 - '4'
 numpy:

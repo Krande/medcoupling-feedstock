@@ -4,7 +4,7 @@ context:
   name: medcoupling
   mpi: ${{ mpi or "nompi" }}
   version: 9.16.0
-  build: 0
+  build: 1
   mpi_prefix: ${{ "nompi" if mpi == "nompi" else "mpi_" + mpi }}
 
 package:
@@ -16,6 +16,12 @@ source:
     sha256: e2bc58f58252ffc215aa5bb61daf3bc3e3fd1ce6e8a7c427b8545696531542a9
     patches:
       - patches/swig_python2_api_compat.patch
+      # ParaMEDMEM with 32-bit ids (win-64): MPITraits lacks the int32 ArrayType used by CFEMDEC
+      - if: win and mpi == 'impi'
+        then:
+          - patches/paramedmem_mpitraits_int32.patch
+          # ParaMEDMEM/ParaMEDLoader have no dllexport macros (never built on Windows upstream)
+          - patches/paramedmem_windows_export_all.patch
   - url: https://github.com/SalomePlatform/configuration/archive/refs/tags/V${{ version | replace('.', '_') }}.tar.gz
     sha256: c8da17e7d09a335b35a1e3c9e679576c3b0c42728a5219514271df6020c70ef6
     target_directory: deps/config
@@ -47,15 +53,24 @@ requirements:
     - hdf5
     - libxml2-devel
     - libmed * *${{ mpi }}*
-    - if: mpi != 'nompi'
+    - if: mpi != 'nompi' and mpi != 'impi'
       then:
         - petsc
         - ${{ mpi }}
+    # Windows Intel MPI (ParaMEDMEM): impi-devel run-exports impi_rt; no PETSc
+    # on win-64 (not needed: the PETSc-based partitioners are disabled)
+    - if: mpi == 'impi'
+      then:
+        - impi-devel ${{ impi_devel }}.*
+        - hdf5 * mpi_impi_*
+        - mpi4py
   run:
     - python
     - ${{ pin_compatible('numpy') }}
-    - if: mpi != 'nompi'
+    - if: mpi != 'nompi' and mpi != 'impi'
       then: ${{ mpi }}
+    - if: mpi == 'impi'
+      then: mpi4py
   run_exports:
     - ${{ pin_subpackage(name, upper_bound='x.x') }}
 

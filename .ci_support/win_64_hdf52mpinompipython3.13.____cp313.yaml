@@ -9,7 +9,9 @@ channel_targets:
 cxx_compiler:
 - vs2022
 hdf5:
-- 1.14.6
+- '2'
+impi_devel:
+- 2021.17.2
 libboost_devel:
 - '1.90'
 libxml2_devel:
@@ -27,7 +29,7 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.11.* *_cpython
+- 3.13.* *_cp313
 target_platform:
 - win-64
 zlib:

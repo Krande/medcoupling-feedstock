@@ -1,7 +1,7 @@
 About medcoupling-feedstock
 ===========================
 
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/medcoupling-feedstock/blob/main/LICENSE.txt)
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/medcoupling-feedstock-mpi-feedstock/blob/main/LICENSE.txt)
 
 Home: https://github.com/SalomePlatform/medcoupling
 
@@ -22,8 +22,8 @@ Current build status
 <table><tr>
     <td>GitHub Actions</td>
     <td>
-      <a href="https://github.com/conda-forge/medcoupling-feedstock/actions/workflows/conda-build.yml">
-        <img src="https://github.com/conda-forge/medcoupling-feedstock/actions/workflows/conda-build.yml/badge.svg?event=push&branch=main">
+      <a href="https://github.com/conda-forge/medcoupling-feedstock-mpi-feedstock/actions/workflows/conda-build.yml">
+        <img src="https://github.com/conda-forge/medcoupling-feedstock-mpi-feedstock/actions/workflows/conda-build.yml/badge.svg?event=push&branch=main">
       </a>
     </td>
   </tr>
