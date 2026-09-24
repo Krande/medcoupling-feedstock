@@ -1,0 +1,50 @@
+diff --git a/src/ParaMEDMEM/ParaIdType.hxx b/src/ParaMEDMEM/ParaIdType.hxx
+index 2a9c0dd..ba6cf73 100644
+--- a/src/ParaMEDMEM/ParaIdType.hxx
++++ b/src/ParaMEDMEM/ParaIdType.hxx
+@@ -26,5 +26,5 @@
+ #ifndef MEDCOUPLING_USE_64BIT_IDS
+ #define MPI_ID_TYPE MPI_INT
+ #else
+-#define MPI_ID_TYPE MPI_LONG
++#define MPI_ID_TYPE MPI_INT64_T
+ #endif
+diff --git a/src/ParaMEDMEM/CommInterface.cxx b/src/ParaMEDMEM/CommInterface.cxx
+index df81971..2c61760 100644
+--- a/src/ParaMEDMEM/CommInterface.cxx
++++ b/src/ParaMEDMEM/CommInterface.cxx
+@@ -25,7 +25,7 @@ MPI_Datatype ParaTraits<double>::MPIDataType = MPI_DOUBLE;
+ 
+ MPI_Datatype ParaTraits<Int32>::MPIDataType = MPI_INT;
+ 
+-MPI_Datatype ParaTraits<Int64>::MPIDataType = MPI_LONG;
++MPI_Datatype ParaTraits<Int64>::MPIDataType = MPI_INT64_T;
+ 
+ void
+ CommInterface::gatherArrays(
+diff --git a/src/MEDPartitioner/MEDPARTITIONER_ParaDomainSelector.cxx b/src/MEDPartitioner/MEDPARTITIONER_ParaDomainSelector.cxx
+index d00109d..38b4017 100644
+--- a/src/MEDPartitioner/MEDPARTITIONER_ParaDomainSelector.cxx
++++ b/src/MEDPartitioner/MEDPARTITIONER_ParaDomainSelector.cxx
+@@ -36,7 +36,7 @@
+ #ifndef MEDCOUPLING_USE_64BIT_IDS
+ #define MPI_ID_TYPE MPI_INT
+ #else
+-#define MPI_ID_TYPE MPI_LONG
++#define MPI_ID_TYPE MPI_INT64_T
+ #endif
+ 
+ #endif
+diff --git a/src/MEDPartitioner/MEDPARTITIONER_UtilsPara.cxx b/src/MEDPartitioner/MEDPARTITIONER_UtilsPara.cxx
+index 195b968..656daa6 100644
+--- a/src/MEDPartitioner/MEDPARTITIONER_UtilsPara.cxx
++++ b/src/MEDPartitioner/MEDPARTITIONER_UtilsPara.cxx
+@@ -43,7 +43,7 @@
+ #ifndef MEDCOUPLING_USE_64BIT_IDS
+ #define MPI_ID_TYPE MPI_INT
+ #else
+-#define MPI_ID_TYPE MPI_LONG
++#define MPI_ID_TYPE MPI_INT64_T
+ #endif
+ 
+ #endif

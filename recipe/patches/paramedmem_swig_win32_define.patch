@@ -1,0 +1,15 @@
+diff --git a/src/ParaMEDMEM_Swig/CMakeLists.txt b/src/ParaMEDMEM_Swig/CMakeLists.txt
+index aa6c2f4..2e54487 100644
+--- a/src/ParaMEDMEM_Swig/CMakeLists.txt
++++ b/src/ParaMEDMEM_Swig/CMakeLists.txt
+@@ -28,6 +28,10 @@ find_package(SWIG REQUIRED)
+ include(${SWIG_USE_FILE})
+ 
+ set_source_files_properties(ParaMEDMEM.i PROPERTIES CPLUSPLUS ON)
++if(WIN32)
++  # as for MEDCoupling.i: selects "long long" for 64-bit mcIdType (long is 32-bit)
++  set_property(SOURCE ParaMEDMEM.i PROPERTY COMPILE_DEFINITIONS WIN32)
++endif()
+ if("${PYTHON_VERSION_MAJOR}" STREQUAL "3")
+   set_source_files_properties(ParaMEDMEM.i PROPERTIES SWIG_FLAGS "-py3")
+ else()

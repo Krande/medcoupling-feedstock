@@ -16,12 +16,15 @@ source:
     sha256: e2bc58f58252ffc215aa5bb61daf3bc3e3fd1ce6e8a7c427b8545696531542a9
     patches:
       - patches/swig_python2_api_compat.patch
-      # ParaMEDMEM with 32-bit ids (win-64): MPITraits lacks the int32 ArrayType used by CFEMDEC
+      # ParaMEDMEM is never built on Windows upstream:
+      # - ParaMEDMEM/ParaMEDLoader have no dllexport macros
+      # - ParaMEDMEM.i misses the WIN32 SWIG define ("long long" 64-bit ids)
+      # - 64-bit ids are exchanged as MPI_LONG, which is 32-bit on Windows (LLP64)
       - if: win and mpi == 'impi'
         then:
-          - patches/paramedmem_mpitraits_int32.patch
-          # ParaMEDMEM/ParaMEDLoader have no dllexport macros (never built on Windows upstream)
           - patches/paramedmem_windows_export_all.patch
+          - patches/paramedmem_swig_win32_define.patch
+          - patches/paramedmem_int64_mpi_datatype.patch
   - url: https://github.com/SalomePlatform/configuration/archive/refs/tags/V${{ version | replace('.', '_') }}.tar.gz
     sha256: c8da17e7d09a335b35a1e3c9e679576c3b0c42728a5219514271df6020c70ef6
     target_directory: deps/config

@@ -4,10 +4,14 @@
 :: FindMPI can interrogate on Windows (and MPI_<lang>_LIBRARIES is a result
 :: variable it overwrites), so describe the conda impi-devel layout with the
 :: FindMPI hint variables.
+:: 64-bit ids in the MPI variant, as on Linux: code_aster's coupling passes
+:: DataArrayInt64 global ids to ParaMESH.setCellGlobal/setNodeGlobal
 set "ON_MPI=OFF"
+set "IDS64=OFF"
 set "MPI_OPTIONS="
 if "%mpi%"=="impi" (
     set "ON_MPI=ON"
+    set "IDS64=ON"
     set "MPI_OPTIONS=-D MPI_C_HEADER_DIR=%LIBRARY_INC% -D MPI_CXX_HEADER_DIR=%LIBRARY_INC% -D MPI_C_LIB_NAMES=impi -D MPI_CXX_LIB_NAMES=impi -D MPI_impi_LIBRARY=%LIBRARY_LIB%/impi.lib -D MPI_CXX_SKIP_MPICXX=ON"
 )
 
@@ -23,7 +27,7 @@ cmake -B build -G "Ninja" . ^
     -D MEDCOUPLING_BUILD_STATIC=OFF ^
     -D MEDCOUPLING_BUILD_TESTS=OFF ^
     -D MEDCOUPLING_BUILD_DOC=OFF ^
-    -D MEDCOUPLING_USE_64BIT_IDS=OFF ^
+    -D MEDCOUPLING_USE_64BIT_IDS=%IDS64% ^
     -D MEDCOUPLING_USE_MPI=%ON_MPI% ^
     -D MEDCOUPLING_MEDLOADER_USE_XDR=OFF ^
     -D MEDCOUPLING_INSTALL_PYTHON=%SP_DIR% ^
